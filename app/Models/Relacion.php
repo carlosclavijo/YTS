@@ -9,5 +9,8 @@ class Relacion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pelicula_id', 'relacionada_id'];
+    protected $fillable = [
+        'pelicula_id',
+        'relacionada_id'
+    ];
 }

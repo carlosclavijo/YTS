@@ -9,5 +9,16 @@ class Pelicula extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'anio', 'calificacionRT', 'calificacionIMDB', 'director', 'videoTrailer', 'sinopsis', 'generos'];
+    protected $fillable = [
+        'nombre',
+        'anio',
+        'calificacionRTA',
+        'calificacionRTC',
+        'calificacionIMDB',
+        'director',
+        'trailer',
+        'sinopsis',
+        'poster',
+        'generos'
+    ];
 }

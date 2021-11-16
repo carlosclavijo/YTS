@@ -15,11 +15,11 @@ class UserController extends Controller
     public function index()
     {
         try{
-            $listUsuario = User::all();
+            $listUsers = User::all();
         }catch (\Exception $e){
             return response()->json(['res'=>false,'message'=>'hubo un error'], 500);
         }
-        return response()->json(['res'=>true, 'usuarios'=> $listUsuario], 200);
+        return response()->json(['res'=>true, 'Users'=> $listUsers], 200);
     }
 
     /**
@@ -49,15 +49,15 @@ class UserController extends Controller
             return response()->json(["res" => false, "reason" => true, "validator" => $validator->messages()]);
         }
         $objUsuario = new User();
-        $objUsuario->name = $request->json('nombres');
+        $objUsuario->name = $request->json('name');
         $objUsuario->email = $request->json('email');
         $objUsuario->password = $request->json('password');
         try {
             $objUsuario->save();
         } catch (\Exception $e) {
-            return response()->json(['res' => false, "reason" => false, 'message' => 'Error al ejecutar consulta, email Posiblemente ya registrado']);//status 500
+            return response()->json(['res' => false, "reason" => false, 'message' => 'Error al ejecutar consulta']);
         }
-        return response()->json(['res' => true,"reason" => false, 'usuario' => $objUsuario]);
+        return response()->json(['res' => true,"reason" => false, 'users' => $objUsuario]);
     }
 
     /**
@@ -71,12 +71,12 @@ class UserController extends Controller
         try {
             $objUsuario = User::find($idUsuario);
             if ($objUsuario == null) {
-                return response()->json(['res' => false, 'message' => 'Error, usuario no encontrada']);//status 404
+                return response()->json(['res' => false, 'message' => 'Error, usuario no encontrada']);
             }
         }catch (\Exception $e){
             return response()->json(['res'=>false,'message'=>'hubo un error'], 500);
         }
-        return response()->json(['res'=>true, 'usuario'=> $objUsuario], 200);
+        return response()->json(['res'=>true, 'users'=> $objUsuario], 200);
 
     }
 
@@ -105,8 +105,8 @@ class UserController extends Controller
         if ($objUsuario == null) {
             return response()->json(['res' => false, 'message' => 'Error, usuario no encontrada']);//status 404
         }
-        if ($request->json('nombres') != null) {
-            $objUsuario->name = $request->json('nombres');
+        if ($request->json('name') != null) {
+            $objUsuario->name = $request->json('name');
         }
         if ($request->json('email') != null) {
             $objUsuario->email = $request->json('email');
@@ -119,7 +119,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json(['res' => false, 'message' => 'Error al ejecutar consulta']);//status 500
         }
-        return response()->json(['res' => true, 'usuario' => $objUsuario]);
+        return response()->json(['res' => true, 'users' => $objUsuario]);
     }
 
     /**
@@ -146,6 +146,6 @@ class UserController extends Controller
         if (count($objUser) == 0) {
             return response()->json(['res' => false, 'message' => 'El usuario no existe']);
         }
-        return response()->json(['res' => true, 'usuario' => $objUser[0]]);
+        return response()->json(['res' => true, 'users' => $objUser[0]]);
     }
 }

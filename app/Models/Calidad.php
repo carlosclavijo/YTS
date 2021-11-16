@@ -9,5 +9,9 @@ class Calidad extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['resolucion'];
+    protected $fillable = [
+        'resolucion',
+        'ubicacion',
+        'calidad_id'
+    ];
 }
